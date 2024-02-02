@@ -23,7 +23,13 @@ function App(): React.JSX.Element {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <Calendar />
+      <Calendar
+        blockStyles={{backgroundColor: '#FF99FF'}}
+        colors={['#662266']}
+        dateInMonthStyles={{fontWeight: '900', color: '#000'}}
+        dateOutOfMontStyles={{fontWeight: '100', color: '#666'}}
+        weekDayStyles={{fontWeight: '900', color: '#66226660'}}
+      />
     </View>
   );
 }

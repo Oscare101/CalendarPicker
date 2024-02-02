@@ -1,75 +1,38 @@
 import {useState} from 'react';
-import {Dimensions, FlatList, StyleSheet, Text, View} from 'react-native';
-import {GetCurrentMonthIndex, GetCurrentYear} from './functions/functions';
+import {
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {
+  GetCurrentMonthIndex,
+  GetCurrentYear,
+  GetDaysTable,
+} from './functions/functions';
+import GradientText from './components/GradientText';
+import weekDaysShort from './constants/weekDaysShort';
+import montsNames from './constants/montsNames';
+import colors from './constants/colors';
+import {CalendarProps} from './constants/interfaces';
 const {width, height} = Dimensions.get('screen');
 
-const colors = {
-  black: '#000000',
-  BG: '#eeeeee',
-};
-
-interface CaledarProps {
-  backgroundColor?: `#${string}`;
-  style?: any;
-}
-
-const weekDaysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
-export default function Calendar(props: CaledarProps) {
+export default function Calendar(props: CalendarProps) {
   const [year, setYear] = useState<number>(GetCurrentYear());
   const [monthIndex, setMonthIndex] = useState<number>(GetCurrentMonthIndex());
-
-  function GenerateArrForDates(date: any) {
-    const firstDayOfMonth = new Date(
-      `${date.getFullYear()}-${date.getMonth() + 1}-01`,
-    );
-    const lastDayOfMonth = new Date(
-      `${date.getFullYear()}-${date.getMonth() + 2}-00`,
-    );
-
-    const datesArray: Date[] = [];
-    let currentDate = firstDayOfMonth;
-    while (currentDate <= lastDayOfMonth) {
-      datesArray.push(new Date(currentDate));
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    return datesArray;
-  }
-
-  function GetDaysTable(year: number, monthIndex: number) {
-    const currentMonthFirstDay = new Date(`${year}-${monthIndex + 1}-01`);
-    const fisrtWeekDay = currentMonthFirstDay.getDay();
-    // array of days for current month
-    const currentMonthArr = GenerateArrForDates(currentMonthFirstDay);
-    // get previous month
-    const previousMonth = currentMonthFirstDay;
-    previousMonth.setDate(0);
-    // array of days for previous month, only amount that will be shown
-    const previousMonthArr = GenerateArrForDates(previousMonth).slice(
-      -fisrtWeekDay + 1,
-    );
-
-    const nextMonthDays =
-      7 * 6 - previousMonthArr.length - currentMonthArr.length;
-    const nextMonthDate = new Date(currentMonthFirstDay);
-    nextMonthDate.setMonth(currentMonthFirstDay.getMonth() + 1);
-    const nextMonthArr = GenerateArrForDates(nextMonthDate).slice(
-      0,
-      nextMonthDays,
-    );
-    return [...previousMonthArr, ...currentMonthArr, ...nextMonthArr];
-  }
 
   function RenderWeekDay({item}: any) {
     return (
       <View
         style={{
           width: `${100 / 7}%`,
+          aspectRatio: 1.5,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{color: '#666'}}>{item}</Text>
+        <Text style={[{color: '#666'}, {...props.weekDayStyles}]}>{item}</Text>
       </View>
     );
   }
@@ -79,23 +42,42 @@ export default function Calendar(props: CaledarProps) {
       new Date(item).getMonth() === new Date().getMonth() &&
       new Date(item).getFullYear() === new Date().getFullYear() &&
       new Date(item).getDate() === new Date().getDate();
+    const inMonth = new Date(item).getMonth() === monthIndex;
     return (
       <View
         style={{
           width: `${100 / 7}%`,
+          aspectRatio: 1.5,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text
-          style={{
-            color: today
-              ? '#FF3333'
-              : new Date(item).getMonth() === monthIndex
-              ? '#000000'
-              : '#666',
-          }}>
-          {new Date(item).getDate()}
-        </Text>
+        {today ? (
+          <GradientText
+            onPress={() => {}}
+            colors={
+              props.colors.length > 1
+                ? props.colors
+                : [...props.colors, ...props.colors]
+            }
+            style={[
+              {fontWeight: '900', fontSize: width * 0.04},
+              inMonth ? props.dateInMonthStyles : props.dateOutOfMontStyles,
+            ]}>
+            {new Date(item).getDate()}
+          </GradientText>
+        ) : (
+          <Text
+            style={[
+              {
+                color: inMonth ? '#000000' : '#666',
+                fontSize: width * 0.04,
+              },
+              inMonth ? props.dateInMonthStyles : props.dateOutOfMontStyles,
+              ,
+            ]}>
+            {new Date(item).getDate()}
+          </Text>
+        )}
       </View>
     );
   }
@@ -127,10 +109,40 @@ export default function Calendar(props: CaledarProps) {
       style={[
         styles.calendarBlock,
         // {backgroundColor: props.backgroundColor || colors.black},
-        {...props.style},
+        {...props.blockStyles},
       ]}>
-      <Text style={[styles.yearTitle]}>{year}</Text>
-      <Text style={[styles.yearTitle]}>{monthIndex}</Text>
+      <View style={styles.titleBlock}>
+        <TouchableOpacity
+          onPress={() => {
+            if (monthIndex) {
+              setMonthIndex(monthIndex - 1);
+            } else {
+              setMonthIndex(11);
+              setYear(year - 1);
+            }
+          }}>
+          <Text style={styles.changeButton}>
+            {montsNames[monthIndex - 1] || montsNames[11]}
+          </Text>
+        </TouchableOpacity>
+        <Text style={[styles.title]}>
+          {year} {montsNames[monthIndex]}
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            if (monthIndex < 11) {
+              setMonthIndex(monthIndex + 1);
+            } else {
+              setMonthIndex(0);
+              setYear(year + 1);
+            }
+          }}>
+          <Text style={styles.changeButton}>
+            {montsNames[monthIndex + 1] || montsNames[0]}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <WeekDaysTable />
       <DaysTable />
     </View>
@@ -139,16 +151,26 @@ export default function Calendar(props: CaledarProps) {
 
 const styles = StyleSheet.create({
   calendarBlock: {
-    width: width * 0.8,
-    // height: height * 0.5,
+    width: width * 0.9,
     backgroundColor: colors.BG,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: width * 0.05,
   },
-  yearTitle: {
-    fontSize: width * 0.07,
+  titleBlock: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: '4%',
+  },
+  title: {
+    fontSize: width * 0.05,
     color: colors.black,
+  },
+  changeButton: {
+    fontWeight: '300',
+    fontSize: width * 0.05,
   },
 });
