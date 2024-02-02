@@ -52,24 +52,62 @@ export default function Calendar(props: CaledarProps) {
 
     const nextMonthDays =
       7 * 6 - previousMonthArr.length - currentMonthArr.length;
-    console.log(nextMonthDays);
-
     const nextMonthDate = new Date(currentMonthFirstDay);
     nextMonthDate.setMonth(currentMonthFirstDay.getMonth() + 1);
     const nextMonthArr = GenerateArrForDates(nextMonthDate).slice(
       0,
       nextMonthDays,
     );
-    console.log(nextMonthArr);
-
     return [...previousMonthArr, ...currentMonthArr, ...nextMonthArr];
   }
 
-  function RenderDay({item}: any) {
+  function RenderWeekDay({item}: any) {
     return (
-      <Text style={{color: 'red', width: '14%'}}>
-        {new Date(item).getDate()}
-      </Text>
+      <View
+        style={{
+          width: `${100 / 7}%`,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text style={{color: '#666'}}>{item}</Text>
+      </View>
+    );
+  }
+
+  function RenderDay({item}: any) {
+    const today =
+      new Date(item).getMonth() === new Date().getMonth() &&
+      new Date(item).getFullYear() === new Date().getFullYear() &&
+      new Date(item).getDate() === new Date().getDate();
+    return (
+      <View
+        style={{
+          width: `${100 / 7}%`,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text
+          style={{
+            color: today
+              ? '#FF3333'
+              : new Date(item).getMonth() === monthIndex
+              ? '#000000'
+              : '#666',
+          }}>
+          {new Date(item).getDate()}
+        </Text>
+      </View>
+    );
+  }
+
+  function WeekDaysTable() {
+    return (
+      <FlatList
+        data={weekDaysShort}
+        renderItem={RenderWeekDay}
+        numColumns={7}
+        style={{width: '100%'}}
+      />
     );
   }
 
@@ -93,6 +131,7 @@ export default function Calendar(props: CaledarProps) {
       ]}>
       <Text style={[styles.yearTitle]}>{year}</Text>
       <Text style={[styles.yearTitle]}>{monthIndex}</Text>
+      <WeekDaysTable />
       <DaysTable />
     </View>
   );
