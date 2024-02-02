@@ -19,20 +19,68 @@ export default function Calendar(props: CaledarProps) {
   const [year, setYear] = useState<number>(GetCurrentYear());
   const [monthIndex, setMonthIndex] = useState<number>(GetCurrentMonthIndex());
 
-  function GetDaysTable(year: number, monthIndex: number) {
-    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-    console.log(new Date(year, monthIndex + 1, 1).getDay());
+  function GenerateArrForDates(date: any) {
+    const firstDayOfMonth = new Date(
+      `${date.getFullYear()}-${date.getMonth() + 1}-01`,
+    );
+    const lastDayOfMonth = new Date(
+      `${date.getFullYear()}-${date.getMonth() + 2}-00`,
+    );
 
-    return [1];
+    const datesArray: Date[] = [];
+    let currentDate = firstDayOfMonth;
+    while (currentDate <= lastDayOfMonth) {
+      datesArray.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return datesArray;
+  }
+
+  function GetDaysTable(year: number, monthIndex: number) {
+    const currentMonthFirstDay = new Date(`${year}-${monthIndex + 1}-01`);
+    const fisrtWeekDay = currentMonthFirstDay.getDay();
+    // array of days for current month
+    const currentMonthArr = GenerateArrForDates(currentMonthFirstDay);
+    // get previous month
+    const previousMonth = currentMonthFirstDay;
+    previousMonth.setDate(0);
+    // array of days for previous month, only amount that will be shown
+    const previousMonthArr = GenerateArrForDates(previousMonth).slice(
+      -fisrtWeekDay + 1,
+    );
+
+    const nextMonthDays =
+      7 * 6 - previousMonthArr.length - currentMonthArr.length;
+    console.log(nextMonthDays);
+
+    const nextMonthDate = new Date(currentMonthFirstDay);
+    nextMonthDate.setMonth(currentMonthFirstDay.getMonth() + 1);
+    const nextMonthArr = GenerateArrForDates(nextMonthDate).slice(
+      0,
+      nextMonthDays,
+    );
+    console.log(nextMonthArr);
+
+    return [...previousMonthArr, ...currentMonthArr, ...nextMonthArr];
   }
 
   function RenderDay({item}: any) {
-    return <Text style={{color: 'red'}}>{item}</Text>;
+    return (
+      <Text style={{color: 'red', width: '14%'}}>
+        {new Date(item).getDate()}
+      </Text>
+    );
   }
 
   function DaysTable() {
     return (
-      <FlatList data={GetDaysTable(year, monthIndex)} renderItem={RenderDay} />
+      <FlatList
+        data={GetDaysTable(year, monthIndex)}
+        renderItem={RenderDay}
+        numColumns={7}
+        style={{width: '100%'}}
+      />
     );
   }
 
