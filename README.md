@@ -12,6 +12,32 @@ import Calendar from './CalendarPicker/Calendar';
 <Calendar />;
 ```
 
+### Usage
+
+Requires `@react-native-masked-view/masked-view` and `react-native-linear-gradient`
+
+```
+npm i @react-native-masked-view/masked-view
+npm i react-native-linear-gradient
+```
+
+Can be used in Expo project with `@react-native-masked-view/masked-view` and `expo-linear-gradient`
+
+Copy ./CalendarPicker directory and prepare it for usage
+
+```
+npm i @react-native-masked-view/masked-view
+npm i expo-linear-gradient
+```
+
+and replace library in `./components/GradientText.tsx` and `./components/RenderDayItem.tsx`
+
+```
+- import LinearGradient from 'react-native-linear-gradient';
+
++ import LinearGradient from 'expo-linear-gradient';
+```
+
 ### Properties
 
 | Property            | Type               | Description                                                                                                                                                   |
