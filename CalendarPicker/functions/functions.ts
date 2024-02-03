@@ -38,7 +38,7 @@ export function GetDaysTable(year: number, monthIndex: number) {
   previousMonth.setUTCDate(0);
   // array of days for previous month, only amount that will be shown
   const previousMonthArr = GenerateArrForDates(previousMonth).slice(
-    -(fisrtWeekDay - 1) || -7,
+    -((fisrtWeekDay || 7) - 1) || -7,
   );
 
   const nextMonthDays =
