@@ -24,15 +24,6 @@ function App(): React.JSX.Element {
     <View style={styles.container}>
       <StatusBar />
       <Calendar
-        onSetDate={(value: any) => {
-          console.log('set', value);
-        }}
-        onCancel={() => {
-          console.log('Cancel');
-        }}
-        onConfirm={(value: any) => {
-          console.log('onConfirm', value);
-        }}
         onSetRange={(value: any) => {
           console.log('range', value);
         }}

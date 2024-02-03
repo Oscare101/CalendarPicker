@@ -61,6 +61,21 @@ and replace library in `./components/GradientText.tsx` and `./components/RenderD
 | cancelButtonTitle   | string             | Title that will be propagated to the cancel button                                                                                                            |
 | confirmButtonTitle  | string             | Title that will be propagated to the confirm button                                                                                                           |
 
+### Example of range input
+
+![example](./screenshots/example3.jpg)
+
+```tsx
+import Calendar from './CalendarPicker/Calendar';
+
+<Calendar
+  onSetRange={(value: any) => {
+    console.log('range', value);
+  }}
+  range={true}
+/>;
+```
+
 ### Example of using all properties
 
 ![example](./screenshots/example2.jpg)
