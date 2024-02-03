@@ -24,33 +24,39 @@ function App(): React.JSX.Element {
     <View style={styles.container}>
       <StatusBar />
       <Calendar
-        // containerStyles={{backgroundColor: '#FF99FF', borderRadius: 5}} // OK
-        // currentMonthStyles={{color: '#FF0000'}} // OK
-        // otherMonthsStyles={{color: '#FF0000'}} // OK
-        // monthsArr={[
-        //   'Jan',
-        //   'Feb',
-        //   'Mar',
-        //   'Apr',
-        //   'May',
-        //   'June',
-        //   'July',
-        //   'Aug',
-        //   'Sept',
-        //   'Oct',
-        //   'Nov',
-        //   'Dec',
-        // ]} // OK
-        // weekDayStyles={{fontWeight: '900', color: '#66226660'}} // OK
-        // weekDaysArr={['Mn', 'Tu', 'Wn', 'Th', 'Fr', 'St', 'Sn']} // OK
-        // colors={['#fff', '#00ff00']} // OK
-        // dateInMonthStyles={{fontWeight: '900', color: '#000'}} // OK
-        // dateOutOfMontStyles={{fontWeight: '100', color: '#666'}} // OK
-        // dateInChosenStyles={{color: '#000000'}} // OK
-        // returnValueType="MM/DD/YYYY"
-        onSetDate={(value: any) => {
-          console.log(value);
-        }}
+      // containerStyles={{backgroundColor: '#FF99FF', borderRadius: 5}} // OK
+      // currentMonthStyles={{color: '#FF0000'}} // OK
+      // otherMonthsStyles={{color: '#FF0000'}} // OK
+      // monthsArr={[
+      //   'Jan',
+      //   'Feb',
+      //   'Mar',
+      //   'Apr',
+      //   'May',
+      //   'June',
+      //   'July',
+      //   'Aug',
+      //   'Sept',
+      //   'Oct',
+      //   'Nov',
+      //   'Dec',
+      // ]} // OK
+      // weekDayStyles={{fontWeight: '900', color: '#66226660'}} // OK
+      // weekDaysArr={['Mn', 'Tu', 'Wn', 'Th', 'Fr', 'St', 'Sn']} // OK
+      // colors={['#fff', '#00ff00']} // OK
+      // dateInMonthStyles={{fontWeight: '900', color: '#000'}} // OK
+      // dateOutOfMontStyles={{fontWeight: '100', color: '#666'}} // OK
+      // dateInChosenStyles={{color: '#000000'}} // OK
+      // returnValueType="MM/DD/YYYY"
+      // onSetDate={(value: any) => {
+      //   console.log('set', value);
+      // }} // OK
+      // onCancel={() => {
+      //   console.log('Cancel');
+      // }} // OK
+      // onConfirm={(value: any) => {
+      //   console.log('onConfirm', value);
+      // }} // OK
       />
     </View>
   );

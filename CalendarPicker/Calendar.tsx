@@ -10,6 +10,7 @@ import styles from './constants/styles';
 import MonthsBlock from './components/MonthsBlock';
 import WeekDaysTable from './components/WeekDaysTable';
 import DatesTable from './components/DatesTable';
+import ButtonsBlock from './components/ButtonsBlock';
 
 export default function Calendar(props: CalendarProps) {
   const [year, setYear] = useState<number>(GetCurrentYear());
@@ -17,7 +18,7 @@ export default function Calendar(props: CalendarProps) {
   const [chosenDate, setChosenDate] = useState<any>();
 
   useEffect(() => {
-    if (chosenDate) {
+    if (chosenDate && props.onSetDate) {
       props.onSetDate(ParseReturn(chosenDate, props.returnValueType));
     }
   }, [chosenDate]);
@@ -48,6 +49,18 @@ export default function Calendar(props: CalendarProps) {
         setChosenDate={(value: any) => setChosenDate(value)}
         setYear={(value: number) => setYear(value)}
         setMonthIndex={(value: number) => setMonthIndex(value)}
+      />
+      <ButtonsBlock
+        onCancel={() => {
+          if (props.onCancel) {
+            props.onCancel();
+          }
+        }}
+        onConfirm={() => {
+          if (props.onConfirm && chosenDate) {
+            props.onConfirm(ParseReturn(chosenDate, props.returnValueType));
+          }
+        }}
       />
     </View>
   );

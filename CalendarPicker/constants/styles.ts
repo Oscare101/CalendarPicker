@@ -46,4 +46,27 @@ export default StyleSheet.create({
     color: colors.dateOutOfMonth,
     fontSize: width * 0.04,
   },
+
+  //
+
+  buttonsBlock: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  bottomButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: width * 0.03,
+  },
+  cancelButton: {
+    fontSize: width * 0.05,
+    color: colors.cancel,
+  },
+  confirmButton: {
+    fontSize: width * 0.05,
+    color: colors.confirm,
+  },
 });

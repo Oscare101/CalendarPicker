@@ -44,4 +44,6 @@ export interface CalendarProps {
   weekDaysArr?: ArryaWithLength7;
   monthsArr?: ArryaWithLength12;
   onSetDate?: any;
+  onCancel?: any;
+  onConfirm?: any;
 }
