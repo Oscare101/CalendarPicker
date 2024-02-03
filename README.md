@@ -40,26 +40,27 @@ and replace library in `./components/GradientText.tsx` and `./components/RenderD
 
 ### Properties
 
-| Property            | Type               | Description                                                                                                                                                   |
-| ------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| containerStyles     | Object             | Styles that will be propagated to the container of the calendar                                                                                               |
-| dateInMonthStyles   | Object             | Styles that will be propagated to the dates title which is in current month calendar                                                                          |
-| dateOutOfMontStyles | Object             | Styles that will be propagated to the dates title which is previous or next current month calendar                                                            |
-| dateInChosenStyles  | Object             | Styles that will be propagated to the date user choose                                                                                                        |
-| weekDayStyles       | Object             | Styles that will be propagated to the week days titles                                                                                                        |
-| currentMonthStyles  | Object             | Styles that will be propagated to the current month title                                                                                                     |
-| otherMonthsStyles   | Object             | Styles that will be propagated to the previous or next month title                                                                                            |
-| colors              | Array              | Colors that will appear to the chosen date as gradient apear                                                                                                  |
-| returnValueType     | string             | Formate of date. Default is DD-MM-YYYY                                                                                                                        |
-| weekDaysArr         | Array              | Array of week days title. Default is ['M', 'T', 'W', 'T', 'F', 'S', 'S']                                                                                      |
-| monthsArr           | Array              | Array of months title. Default is ['January', 'February', 'March', 'April',' May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',] |
-| onSetDate           | function => string | Function after every time user choose date, returns date                                                                                                      |
-| onCancel            | function => ()     | Function after cancel, return nothing                                                                                                                         |
-| onConfirm           | function => string | Function after confirm, returns date                                                                                                                          |
-| cancelButtonStyles  | Object             | Styles that will be propagated to the cancel button                                                                                                           |
-| confirmButtonStyles | Object             | Styles that will be propagated to the confirm button                                                                                                          |
-| cancelButtonTitle   | string             | Title that will be propagated to the cancel button                                                                                                            |
-| confirmButtonTitle  | string             | Title that will be propagated to the confirm button                                                                                                           |
+| Property            | Type                 | Description                                                                                                                                                   |
+| ------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| containerStyles     | Object               | Styles that will be propagated to the container of the calendar                                                                                               |
+| dateInMonthStyles   | Object               | Styles that will be propagated to the dates title which is in current month calendar                                                                          |
+| dateOutOfMontStyles | Object               | Styles that will be propagated to the dates title which is previous or next current month calendar                                                            |
+| dateInChosenStyles  | Object               | Styles that will be propagated to the date user choose                                                                                                        |
+| weekDayStyles       | Object               | Styles that will be propagated to the week days titles                                                                                                        |
+| currentMonthStyles  | Object               | Styles that will be propagated to the current month title                                                                                                     |
+| otherMonthsStyles   | Object               | Styles that will be propagated to the previous or next month title                                                                                            |
+| colors              | Array                | Colors that will appear to the chosen date as gradient apear                                                                                                  |
+| returnValueType     | string               | Formate of date. Default is DD-MM-YYYY                                                                                                                        |
+| weekDaysArr         | Array                | Array of week days title. Default is ['M', 'T', 'W', 'T', 'F', 'S', 'S']                                                                                      |
+| monthsArr           | Array                | Array of months title. Default is ['January', 'February', 'March', 'April',' May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',] |
+| onSetDate           | function => string   | Function after every time user choose date, returns date                                                                                                      |
+| onSetRange          | function => string[] | Function after user selects both dates for range                                                                                                              |
+| onCancel            | function => ()       | Function after cancel, return nothing                                                                                                                         |
+| onConfirm           | function => string   | Function after confirm, returns date                                                                                                                          |
+| cancelButtonStyles  | Object               | Styles that will be propagated to the cancel button                                                                                                           |
+| confirmButtonStyles | Object               | Styles that will be propagated to the confirm button                                                                                                          |
+| cancelButtonTitle   | string               | Title that will be propagated to the cancel button                                                                                                            |
+| confirmButtonTitle  | string               | Title that will be propagated to the confirm button                                                                                                           |
 
 ### Example of range input
 
