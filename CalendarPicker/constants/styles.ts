@@ -22,6 +22,13 @@ export default StyleSheet.create({
     fontSize: width * 0.05,
     color: colors.month,
   },
+  monthButton: {
+    paddingVertical: width * 0.02,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
   monthChange: {
     fontSize: width * 0.04,
     color: colors.monthChange,

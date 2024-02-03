@@ -8,13 +8,17 @@ export default function ButtonsBlock(props: any) {
         style={styles.bottomButton}
         activeOpacity={0.8}
         onPress={() => props.onCancel()}>
-        <Text style={[styles.cancelButton]}>Cancel</Text>
+        <Text style={[styles.cancelButton, props.cancelButtonStyles]}>
+          {props.cancelButtonTitle || 'Cancel'}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.bottomButton}
         activeOpacity={0.8}
         onPress={() => props.onConfirm()}>
-        <Text style={[styles.confirmButton]}>Confirm</Text>
+        <Text style={[styles.confirmButton, props.confirmButtonStyles]}>
+          {props.confirmButtonTitle || 'Confirm'}
+        </Text>
       </TouchableOpacity>
     </View>
   );

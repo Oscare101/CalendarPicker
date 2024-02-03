@@ -51,6 +51,10 @@ export default function Calendar(props: CalendarProps) {
         setMonthIndex={(value: number) => setMonthIndex(value)}
       />
       <ButtonsBlock
+        cancelButtonStyles={props.cancelButtonStyles}
+        confirmButtonStyles={props.confirmButtonStyles}
+        cancelButtonTitle={props.cancelButtonTitle}
+        confirmButtonTitle={props.confirmButtonTitle}
         onCancel={() => {
           if (props.onCancel) {
             props.onCancel();

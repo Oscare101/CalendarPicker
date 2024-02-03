@@ -46,4 +46,8 @@ export interface CalendarProps {
   onSetDate?: any;
   onCancel?: any;
   onConfirm?: any;
+  cancelButtonStyles?: any;
+  confirmButtonStyles?: any;
+  cancelButtonTitle?: string;
+  confirmButtonTitle?: string;
 }

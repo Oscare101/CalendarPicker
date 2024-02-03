@@ -25,7 +25,7 @@ export default function MonthsBlock(props: any) {
 
   return (
     <View style={styles.titleBlock}>
-      <TouchableOpacity onPress={OnPreviousMonth}>
+      <TouchableOpacity onPress={OnPreviousMonth} style={styles.monthButton}>
         <Text style={[styles.monthChange, {...props.otherMonthsStyles}]}>
           {months[props.monthIndex - 1] || months[11]}
         </Text>
@@ -33,7 +33,9 @@ export default function MonthsBlock(props: any) {
       <Text style={[styles.monthTitle, {...props.currentMonthStyles}]}>
         {props.year} {months[props.monthIndex]}
       </Text>
-      <TouchableOpacity onPress={OnNextMonth}>
+      <TouchableOpacity
+        onPress={OnNextMonth}
+        style={[styles.monthButton, {justifyContent: 'flex-end'}]}>
         <Text style={[styles.monthChange, {...props.otherMonthsStyles}]}>
           {months[props.monthIndex + 1] || months[0]}
         </Text>
