@@ -43,4 +43,5 @@ export interface CalendarProps {
     | 'MM/DD/YYYY';
   weekDaysArr?: ArryaWithLength7;
   monthsArr?: ArryaWithLength12;
+  onSetDate?: any;
 }

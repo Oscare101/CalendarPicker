@@ -68,3 +68,29 @@ export function IsChosenDate(date: any, chosen: any) {
     new Date(date).getDate() === new Date(chosen).getDate()
   );
 }
+
+export function ParseReturn(chosenDate: any, type: any) {
+  const year = new Date(chosenDate).getFullYear();
+  const month = new Date(chosenDate).getMonth() + 1;
+  const date = new Date(chosenDate).getDate();
+
+  if (type === 'YYYY-MM-DD') {
+    return `${year}-${month}-${date}`;
+  } else if (type === 'YYYY-DD-MM') {
+    return `${year}-${date}-${month}`;
+  } else if (type === 'DD-MM-YYYY') {
+    return `${date}-${month}-${year}`;
+  } else if (type === 'MM-DD-YYYY') {
+    return `${month}-${date}-${year}`;
+  } else if (type === 'YYYY/MM/DD') {
+    return `${year}/${month}/${date}`;
+  } else if (type === 'YYYY/DD/MM') {
+    return `${year}/${date}/${month}`;
+  } else if (type === 'DD/MM/YYYY') {
+    return `${date}/${month}/${year}`;
+  } else if (type === 'MM/DD/YYYY') {
+    return `${month}/${date}/${year}`;
+  } else {
+    return `${date}-${month}-${year}`;
+  }
+}

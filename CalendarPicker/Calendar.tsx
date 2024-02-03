@@ -1,6 +1,10 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {GetCurrentMonthIndex, GetCurrentYear} from './functions/functions';
+import {
+  GetCurrentMonthIndex,
+  GetCurrentYear,
+  ParseReturn,
+} from './functions/functions';
 import {CalendarProps} from './constants/interfaces';
 import styles from './constants/styles';
 import MonthsBlock from './components/MonthsBlock';
@@ -11,6 +15,12 @@ export default function Calendar(props: CalendarProps) {
   const [year, setYear] = useState<number>(GetCurrentYear());
   const [monthIndex, setMonthIndex] = useState<number>(GetCurrentMonthIndex());
   const [chosenDate, setChosenDate] = useState<any>();
+
+  useEffect(() => {
+    if (chosenDate) {
+      props.onSetDate(ParseReturn(chosenDate, props.returnValueType));
+    }
+  }, [chosenDate]);
 
   return (
     <View style={[styles.calendarBlock, {...props.containerStyles}]}>
