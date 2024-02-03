@@ -24,11 +24,12 @@ interface ArryaWithLength12 {
 }
 
 export interface CalendarProps {
-  backgroundColor?: `#${string}`;
   containerStyles?: any;
   dateInMonthStyles?: any;
   dateOutOfMontStyles?: any;
   weekDayStyles?: any;
+  currentMonthStyles?: any;
+  otherMonthsStyles?: any;
   colors?: string[];
   returnValueType?:
     | 'YYYY-MM-DD'

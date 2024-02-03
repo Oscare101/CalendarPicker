@@ -18,9 +18,14 @@ export default StyleSheet.create({
     width: '100%',
     padding: '4%',
   },
-  title: {
+  monthTitle: {
     fontSize: width * 0.05,
-    color: colors.black,
+    color: colors.month,
+  },
+  monthChange: {
+    fontSize: width * 0.04,
+    color: colors.monthChange,
+    fontWeight: '200',
   },
 
   changeButton: {

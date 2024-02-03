@@ -31,27 +31,32 @@ export function GetDaysTable(year: number, monthIndex: number) {
   const fisrtWeekDay = currentMonthFirstDay.getUTCDay();
 
   // array of days for current month
-  console.log('now', currentMonthFirstDay);
   const currentMonthArr = GenerateArrForDates(currentMonthFirstDay);
 
   // get previous month
   const previousMonth = new Date(currentMonthFirstDay);
   previousMonth.setUTCDate(0);
   // array of days for previous month, only amount that will be shown
-  console.log('previous', previousMonth);
   const previousMonthArr = GenerateArrForDates(previousMonth).slice(
-    -fisrtWeekDay + 1 || -7,
+    -(fisrtWeekDay - 1) || -7,
   );
 
   const nextMonthDays =
     7 * 6 - previousMonthArr.length - currentMonthArr.length;
   const nextMonthDate = new Date(currentMonthFirstDay);
   nextMonthDate.setUTCMonth(currentMonthFirstDay.getUTCMonth() + 1);
-  console.log('next', nextMonthDate);
   const nextMonthArr = GenerateArrForDates(nextMonthDate).slice(
     0,
     nextMonthDays,
   );
 
   return [...previousMonthArr, ...currentMonthArr, ...nextMonthArr];
+}
+
+export function IsDateToday(date: any) {
+  return (
+    new Date(date).getMonth() === new Date().getMonth() &&
+    new Date(date).getFullYear() === new Date().getFullYear() &&
+    new Date(date).getDate() === new Date().getDate()
+  );
 }

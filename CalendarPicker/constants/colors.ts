@@ -1,5 +1,6 @@
 export default {
-  black: '#000000',
+  month: '#EEEEEE',
+  monthChange: '#666666',
   BG: '#333333',
   weekDay: '#999999',
   dateInOfMonth: '#FFFFFF',
