@@ -15,13 +15,24 @@ import ButtonsBlock from './components/ButtonsBlock';
 export default function Calendar(props: CalendarProps) {
   const [year, setYear] = useState<number>(GetCurrentYear());
   const [monthIndex, setMonthIndex] = useState<number>(GetCurrentMonthIndex());
-  const [chosenDate, setChosenDate] = useState<any>();
+  const [chosenDate, setChosenDate] = useState<any>(); // range false
+  const [chosenRangeFrom, setChosenRangeFrom] = useState<any>(); // range true
+  const [chosenRangeTo, setChosenRangeTo] = useState<any>(); // range true
 
   useEffect(() => {
     if (chosenDate && props.onSetDate) {
       props.onSetDate(ParseReturn(chosenDate, props.returnValueType));
     }
   }, [chosenDate]);
+
+  useEffect(() => {
+    if (chosenRangeFrom && chosenRangeTo && props.onSetRange) {
+      props.onSetRange([
+        ParseReturn(chosenRangeFrom, props.returnValueType),
+        ParseReturn(chosenRangeTo, props.returnValueType),
+      ]);
+    }
+  }, [chosenRangeFrom, chosenRangeTo]);
 
   return (
     <View style={[styles.calendarBlock, {...props.containerStyles}]}>
@@ -49,6 +60,11 @@ export default function Calendar(props: CalendarProps) {
         setChosenDate={(value: any) => setChosenDate(value)}
         setYear={(value: number) => setYear(value)}
         setMonthIndex={(value: number) => setMonthIndex(value)}
+        range={props.range}
+        chosenRangeFrom={chosenRangeFrom}
+        setChosenRangeFrom={(value: any) => setChosenRangeFrom(value)}
+        chosenRangeTo={chosenRangeTo}
+        setChosenRangeTo={(value: any) => setChosenRangeTo(value)}
       />
       <ButtonsBlock
         cancelButtonStyles={props.cancelButtonStyles}
@@ -61,8 +77,17 @@ export default function Calendar(props: CalendarProps) {
           }
         }}
         onConfirm={() => {
-          if (props.onConfirm && chosenDate) {
-            props.onConfirm(ParseReturn(chosenDate, props.returnValueType));
+          if (props.range) {
+            if (chosenRangeFrom && chosenRangeTo && props.onSetRange) {
+              props.onSetRange([
+                ParseReturn(chosenRangeFrom, props.returnValueType),
+                ParseReturn(chosenRangeTo, props.returnValueType),
+              ]);
+            }
+          } else {
+            if (props.onConfirm && chosenDate) {
+              props.onConfirm(ParseReturn(chosenDate, props.returnValueType));
+            }
           }
         }}
       />

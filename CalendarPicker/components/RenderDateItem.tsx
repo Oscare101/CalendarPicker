@@ -8,7 +8,10 @@ import LinearGradient from 'react-native-linear-gradient';
 export function RenderDayItem(props: any) {
   const today = IsDateToday(props.item);
   const inMonth = new Date(props.item).getMonth() === props.monthIndex;
-  const isChosenDate = IsChosenDate(props.item, props.chosenDate);
+  const isChosenDate =
+    IsChosenDate(props.item, props.chosenDate) ||
+    IsChosenDate(props.item, props.chosenRangeFrom) ||
+    IsChosenDate(props.item, props.chosenRangeTo);
 
   const gradientColors = props.colors
     ? props.colors.length > 1
@@ -34,8 +37,38 @@ export function RenderDayItem(props: any) {
     }
   }
 
+  function OnSetRange() {
+    if (!props.chosenRangeFrom && !props.chosenRangeTo) {
+      props.setChosenRangeFrom(props.item);
+    } else if (props.chosenRangeFrom && !props.chosenRangeTo) {
+      if (
+        new Date(props.item).getTime() ===
+        new Date(props.chosenRangeFrom).getTime()
+      ) {
+        return false;
+      }
+      if (
+        new Date(props.chosenRangeFrom).getTime() >
+        new Date(props.item).getTime()
+      ) {
+        props.setChosenRangeTo(props.chosenRangeFrom);
+
+        props.setChosenRangeFrom(props.item);
+      } else {
+        props.setChosenRangeTo(props.item);
+      }
+    } else {
+      props.setChosenRangeFrom(props.item);
+      props.setChosenRangeTo();
+    }
+  }
+
   function OnSetDate() {
-    props.setChosenDate(props.item);
+    if (props.range) {
+      OnSetRange();
+    } else {
+      props.setChosenDate(props.item);
+    }
 
     if (
       new Date(props.item).getMonth() === props.monthIndex - 1 ||

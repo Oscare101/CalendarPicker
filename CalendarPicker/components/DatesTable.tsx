@@ -19,6 +19,11 @@ export default function DatesTable(props: any) {
           setChosenDate={(value: any) => props.setChosenDate(value)}
           setYear={(value: number) => props.setYear(value)}
           setMonthIndex={(value: number) => props.setMonthIndex(value)}
+          range={props.range}
+          chosenRangeFrom={props.chosenRangeFrom}
+          setChosenRangeFrom={(value: any) => props.setChosenRangeFrom(value)}
+          chosenRangeTo={props.chosenRangeTo}
+          setChosenRangeTo={(value: any) => props.setChosenRangeTo(value)}
         />
       )}
       numColumns={7}
