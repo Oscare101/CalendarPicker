@@ -17,11 +17,14 @@ import weekDaysShort from './constants/weekDaysShort';
 import montsNames from './constants/montsNames';
 import colors from './constants/colors';
 import {CalendarProps} from './constants/interfaces';
+import styles from './constants/styles';
 const {width, height} = Dimensions.get('screen');
 
 export default function Calendar(props: CalendarProps) {
   const [year, setYear] = useState<number>(GetCurrentYear());
   const [monthIndex, setMonthIndex] = useState<number>(GetCurrentMonthIndex());
+
+  const [chosenDate, setChosenDate] = useState<any>();
 
   function RenderWeekDay({item}: any) {
     return (
@@ -32,7 +35,7 @@ export default function Calendar(props: CalendarProps) {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={[{color: '#666'}, {...props.weekDayStyles}]}>{item}</Text>
+        <Text style={[styles.weekDay, {...props.weekDayStyles}]}>{item}</Text>
       </View>
     );
   }
@@ -43,6 +46,7 @@ export default function Calendar(props: CalendarProps) {
       new Date(item).getFullYear() === new Date().getFullYear() &&
       new Date(item).getDate() === new Date().getDate();
     const inMonth = new Date(item).getMonth() === monthIndex;
+
     return (
       <View
         style={{
@@ -55,26 +59,26 @@ export default function Calendar(props: CalendarProps) {
           <GradientText
             onPress={() => {}}
             colors={
-              props.colors.length > 1
-                ? props.colors
-                : [...props.colors, ...props.colors]
+              props.colors
+                ? props.colors.length > 1
+                  ? props.colors
+                  : [...props.colors, ...props.colors]
+                : [colors.color1, colors.color2]
             }
             style={[
-              {fontWeight: '900', fontSize: width * 0.04},
-              inMonth ? props.dateInMonthStyles : props.dateOutOfMontStyles,
+              inMonth
+                ? [styles.dateInMonth, props.dateInMonthStyles]
+                : [styles.dateoutOfMonth, props.dateOutOfMontStyles],
             ]}>
             {new Date(item).getDate()}
           </GradientText>
         ) : (
           <Text
-            style={[
-              {
-                color: inMonth ? '#000000' : '#666',
-                fontSize: width * 0.04,
-              },
-              inMonth ? props.dateInMonthStyles : props.dateOutOfMontStyles,
-              ,
-            ]}>
+            style={
+              inMonth
+                ? [styles.dateInMonth, props.dateInMonthStyles]
+                : [styles.dateoutOfMonth, props.dateOutOfMontStyles]
+            }>
             {new Date(item).getDate()}
           </Text>
         )}
@@ -105,12 +109,7 @@ export default function Calendar(props: CalendarProps) {
   }
 
   return (
-    <View
-      style={[
-        styles.calendarBlock,
-        // {backgroundColor: props.backgroundColor || colors.black},
-        {...props.blockStyles},
-      ]}>
+    <View style={[styles.calendarBlock, {...props.containerStyles}]}>
       <View style={styles.titleBlock}>
         <TouchableOpacity
           onPress={() => {
@@ -148,29 +147,3 @@ export default function Calendar(props: CalendarProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  calendarBlock: {
-    width: width * 0.9,
-    backgroundColor: colors.BG,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: width * 0.05,
-  },
-  titleBlock: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    padding: '4%',
-  },
-  title: {
-    fontSize: width * 0.05,
-    color: colors.black,
-  },
-  changeButton: {
-    fontWeight: '300',
-    fontSize: width * 0.05,
-  },
-});
