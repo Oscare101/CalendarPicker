@@ -15,11 +15,17 @@ import ButtonsBlock from './components/ButtonsBlock';
 export default function Calendar(props: CalendarProps) {
   const [year, setYear] = useState<number>(GetCurrentYear());
   const [monthIndex, setMonthIndex] = useState<number>(GetCurrentMonthIndex());
-  const [chosenDate, setChosenDate] = useState<any>(); // range false
-  const [chosenRangeFrom, setChosenRangeFrom] = useState<any>(); // range true
-  const [chosenRangeTo, setChosenRangeTo] = useState<any>(); // range true
+  const [chosenDate, setChosenDate] = useState<any>(props.initialDate); // range false
+  const [chosenRangeFrom, setChosenRangeFrom] = useState<any>(
+    props.initialRange ? props.initialRange[0] : null,
+  ); // range true
+  const [chosenRangeTo, setChosenRangeTo] = useState<any>(
+    props.initialRange ? props.initialRange[1] : null,
+  ); // range true
 
   useEffect(() => {
+    console.log(chosenDate);
+
     if (chosenDate && props.onSetDate) {
       props.onSetDate(ParseReturn(chosenDate, props.returnValueType));
     }

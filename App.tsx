@@ -6,17 +6,7 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
+import {StatusBar, StyleSheet, View} from 'react-native';
 import Calendar from './CalendarPicker/Calendar';
 
 function App(): React.JSX.Element {
@@ -24,10 +14,10 @@ function App(): React.JSX.Element {
     <View style={styles.container}>
       <StatusBar />
       <Calendar
-        onSetRange={(value: any) => {
-          console.log('range', value);
+        onSetDate={(value: any) => {
+          console.log('set date', value);
         }}
-        range={true}
+        initialDate={new Date('2024-02-02')}
       />
     </View>
   );

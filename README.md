@@ -42,6 +42,9 @@ and replace library in `./components/GradientText.tsx` and `./components/RenderD
 
 | Property            | Type                 | Description                                                                                                                                                   |
 | ------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| initialDate         | Object               | Initially selected date. new Date() type                                                                                                                      |
+| initialRange        | Object[]             | Initially selected range. new Date() type                                                                                                                     |
+| range               | boolean              | Calendar will work for range between two dates                                                                                                                |
 | containerStyles     | Object               | Styles that will be propagated to the container of the calendar                                                                                               |
 | dateInMonthStyles   | Object               | Styles that will be propagated to the dates title which is in current month calendar                                                                          |
 | dateOutOfMontStyles | Object               | Styles that will be propagated to the dates title which is previous or next current month calendar                                                            |
@@ -51,7 +54,7 @@ and replace library in `./components/GradientText.tsx` and `./components/RenderD
 | otherMonthsStyles   | Object               | Styles that will be propagated to the previous or next month title                                                                                            |
 | colors              | Array                | Colors that will appear to the chosen date as gradient apear                                                                                                  |
 | returnValueType     | string               | Formate of date. Default is DD-MM-YYYY                                                                                                                        |
-| weekDaysArr         | Array                | Array of week days title. Default is ['M', 'T', 'W', 'T', 'F', 'S', 'S']                                                                                      |
+| weekDaysArr         | Array                | Array of week days title. Starts with monday. Default is ['M', 'T', 'W', 'T', 'F', 'S', 'S']                                                                  |
 | monthsArr           | Array                | Array of months title. Default is ['January', 'February', 'March', 'April',' May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',] |
 | onSetDate           | function => string   | Function after every time user choose date, returns date                                                                                                      |
 | onSetRange          | function => string[] | Function after user selects both dates for range                                                                                                              |
@@ -62,19 +65,42 @@ and replace library in `./components/GradientText.tsx` and `./components/RenderD
 | cancelButtonTitle   | string               | Title that will be propagated to the cancel button                                                                                                            |
 | confirmButtonTitle  | string               | Title that will be propagated to the confirm button                                                                                                           |
 
-### Example of range input
+### Initial values
 
-![example](./screenshots/example3.jpg)
+Initially selected date
 
 ```tsx
-import Calendar from './CalendarPicker/Calendar';
+<Calendar
+  onSetDate={(value: any) => {
+    console.log('set date', value);
+  }}
+  initialDate={new Date('2024-02-02')}
+/>
+```
 
+Initially selected range of dates
+
+```tsx
 <Calendar
   onSetRange={(value: any) => {
     console.log('range', value);
   }}
   range={true}
-/>;
+  initialRange={[new Date('2024-02-02'), new Date('2024-02-08')]}
+/>
+```
+
+### Example of range input
+
+![example](./screenshots/example3.jpg)
+
+```tsx
+<Calendar
+  onSetRange={(value: any) => {
+    console.log('range', value);
+  }}
+  range={true}
+/>
 ```
 
 ### Example of using all properties
@@ -82,8 +108,6 @@ import Calendar from './CalendarPicker/Calendar';
 ![example](./screenshots/example2.jpg)
 
 ```tsx
-import Calendar from './CalendarPicker/Calendar';
-
 <Calendar
   containerStyles={{backgroundColor: '#000', borderRadius: 5}}
   currentMonthStyles={{color: '#FFF'}}
@@ -122,5 +146,5 @@ import Calendar from './CalendarPicker/Calendar';
   confirmButtonStyles={{color: '#6fde8d'}}
   cancelButtonTitle="Скасувати"
   confirmButtonTitle="Підтвердити"
-/>;
+/>
 ```

@@ -24,6 +24,8 @@ interface ArryaWithLength12 {
 }
 
 export interface CalendarProps {
+  initialDate?: Object;
+  initialRange?: Object[];
   range?: boolean;
   onSetRange?: any;
   containerStyles?: any;
