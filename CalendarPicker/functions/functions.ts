@@ -60,3 +60,11 @@ export function IsDateToday(date: any) {
     new Date(date).getDate() === new Date().getDate()
   );
 }
+
+export function IsChosenDate(date: any, chosen: any) {
+  return (
+    new Date(date).getMonth() === new Date(chosen).getMonth() &&
+    new Date(date).getFullYear() === new Date(chosen).getFullYear() &&
+    new Date(date).getDate() === new Date(chosen).getDate()
+  );
+}

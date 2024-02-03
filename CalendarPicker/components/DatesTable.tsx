@@ -13,7 +13,12 @@ export default function DatesTable(props: any) {
           year={props.year}
           dateInMonthStyles={props.dateInMonthStyles}
           dateOutOfMontStyles={props.dateOutOfMontStyles}
+          dateInChosenStyles={props.dateInChosenStyles}
           colors={props.colors}
+          chosenDate={props.chosenDate}
+          setChosenDate={(value: any) => props.setChosenDate(value)}
+          setYear={(value: number) => props.setYear(value)}
+          setMonthIndex={(value: number) => props.setMonthIndex(value)}
         />
       )}
       numColumns={7}

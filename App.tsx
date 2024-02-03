@@ -46,6 +46,7 @@ function App(): React.JSX.Element {
         // colors={['#fff', '#00ff00']} // OK
         // dateInMonthStyles={{fontWeight: '900', color: '#000'}} // OK
         // dateOutOfMontStyles={{fontWeight: '100', color: '#666'}} // OK
+        // dateInChosenStyles={{color: '#000000'}} // OK
         returnValueType="DD-MM-YYYY"
       />
     </View>

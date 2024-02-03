@@ -27,6 +27,7 @@ export interface CalendarProps {
   containerStyles?: any;
   dateInMonthStyles?: any;
   dateOutOfMontStyles?: any;
+  dateInChosenStyles?: any;
   weekDayStyles?: any;
   currentMonthStyles?: any;
   otherMonthsStyles?: any;

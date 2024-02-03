@@ -32,7 +32,12 @@ export default function Calendar(props: CalendarProps) {
         monthIndex={monthIndex}
         dateInMonthStyles={props.dateInMonthStyles}
         dateOutOfMontStyles={props.dateOutOfMontStyles}
+        dateInChosenStyles={props.dateInChosenStyles}
         colors={props.colors}
+        chosenDate={chosenDate}
+        setChosenDate={(value: any) => setChosenDate(value)}
+        setYear={(value: number) => setYear(value)}
+        setMonthIndex={(value: number) => setMonthIndex(value)}
       />
     </View>
   );
