@@ -2,27 +2,17 @@
 
 Bare React Native calendar picker
 
-### example of components with default properties
+### Example of components with default properties
 
 ![example](./screenshots/example1.jpg)
-
-### Usage
 
 ```tsx
 import Calendar from './CalendarPicker/Calendar';
 
-<Calendar
-  onSetDate={(value: any) => {
-    console.log('set', value);
-  }}
-  onCancel={() => {
-    console.log('Cancel');
-  }}
-  onConfirm={(value: any) => {
-    console.log('onConfirm', value);
-  }}
-/>;
+<Calendar />;
 ```
+
+### Properties
 
 | Property            | Type               | Description                                                                                                                                                   |
 | ------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -45,7 +35,7 @@ import Calendar from './CalendarPicker/Calendar';
 | cancelButtonTitle   | string             | Title that will be propagated to the cancel button                                                                                                            |
 | confirmButtonTitle  | string             | Title that will be propagated to the confirm button                                                                                                           |
 
-### example of using all properties
+### Example of using all properties
 
 ![example](./screenshots/example2.jpg)
 
