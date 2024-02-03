@@ -26,6 +26,18 @@ export default function Calendar(props: CalendarProps) {
   }, [chosenDate]);
 
   useEffect(() => {
+    if (chosenRangeFrom && props.onSetDate) {
+      props.onSetDate(ParseReturn(chosenRangeFrom, props.returnValueType));
+    }
+  }, [chosenRangeFrom]);
+
+  useEffect(() => {
+    if (chosenRangeTo && props.onSetDate) {
+      props.onSetDate(ParseReturn(chosenRangeTo, props.returnValueType));
+    }
+  }, [chosenRangeTo]);
+
+  useEffect(() => {
     if (chosenRangeFrom && chosenRangeTo && props.onSetRange) {
       props.onSetRange([
         ParseReturn(chosenRangeFrom, props.returnValueType),

@@ -13,6 +13,15 @@ export function RenderDayItem(props: any) {
     IsChosenDate(props.item, props.chosenRangeFrom) ||
     IsChosenDate(props.item, props.chosenRangeTo);
 
+  const isBetweenRange =
+    props.range &&
+    props.chosenRangeFrom &&
+    props.chosenRangeTo &&
+    new Date(props.item).getTime() <= new Date(props.chosenRangeTo).getTime() &&
+    new Date(props.item).getTime() >= new Date(props.chosenRangeFrom).getTime();
+  // ? IsBetweenRange(props.item, [props.chosenRangeFrom, props.chosenRangeTo])
+  // : false;
+
   const gradientColors = props.colors
     ? props.colors.length > 1
       ? props.colors
@@ -117,6 +126,37 @@ export function RenderDayItem(props: any) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
+      {isBetweenRange ? (
+        <LinearGradient
+          colors={gradientColors}
+          start={{x: 0, y: 1}}
+          end={{x: 0, y: 0}}
+          style={{
+            position: 'absolute',
+            zIndex: -1,
+            height: '80%',
+            width:
+              new Date(props.item).getTime() ===
+                new Date(props.chosenRangeTo).getTime() ||
+              new Date(props.item).getTime() ===
+                new Date(props.chosenRangeFrom).getTime()
+                ? '50%'
+                : '100%',
+            left:
+              new Date(props.item).getTime() ===
+              new Date(props.chosenRangeTo).getTime()
+                ? '0%'
+                : new Date(props.item).getTime() ===
+                  new Date(props.chosenRangeFrom).getTime()
+                ? '50%'
+                : 0,
+            backgroundColor: gradientColors[0],
+            opacity: 0.2,
+          }}></LinearGradient>
+      ) : (
+        <></>
+      )}
+
       <TouchableOpacity
         style={{
           height: '100%',
