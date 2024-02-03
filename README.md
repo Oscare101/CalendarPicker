@@ -1,79 +1,94 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Calendar Picker
 
-# Getting Started
+Bare React Native calendar picker
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+### example of components with default properties
 
-## Step 1: Start the Metro Server
+![example](./screenshots/example1.jpg)
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Usage
 
-To start Metro, run the following command from the _root_ of your React Native project:
+```tsx
+import Calendar from './CalendarPicker/Calendar';
 
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+<Calendar
+  onSetDate={(value: any) => {
+    console.log('set', value);
+  }}
+  onCancel={() => {
+    console.log('Cancel');
+  }}
+  onConfirm={(value: any) => {
+    console.log('onConfirm', value);
+  }}
+/>;
 ```
 
-## Step 2: Start your Application
+| Property            | Type               | Description                                                                                                                                                   |
+| ------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| containerStyles     | Object             | Styles that will be propagated to the container of the calendar                                                                                               |
+| dateInMonthStyles   | Object             | Styles that will be propagated to the dates title which is in current month calendar                                                                          |
+| dateOutOfMontStyles | Object             | Styles that will be propagated to the dates title which is previous or next current month calendar                                                            |
+| dateInChosenStyles  | Object             | Styles that will be propagated to the date user choose                                                                                                        |
+| weekDayStyles       | Object             | Styles that will be propagated to the week days titles                                                                                                        |
+| currentMonthStyles  | Object             | Styles that will be propagated to the current month title                                                                                                     |
+| otherMonthsStyles   | Object             | Styles that will be propagated to the previous or next month title                                                                                            |
+| colors              | Array              | Colors that will appear to the chosen date as gradient apear                                                                                                  |
+| returnValueType     | string             | Formate of date. Default is DD-MM-YYYY                                                                                                                        |
+| weekDaysArr         | Array              | Array of week days title. Default is ['M', 'T', 'W', 'T', 'F', 'S', 'S']                                                                                      |
+| monthsArr           | Array              | Array of months title. Default is ['January', 'February', 'March', 'April',' May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',] |
+| onSetDate           | function => string | Function after every time user choose date, returns date                                                                                                      |
+| onCancel            | function => ()     | Function after cancel, return nothing                                                                                                                         |
+| onConfirm           | function => string | Function after confirm, returns date                                                                                                                          |
+| cancelButtonStyles  | Object             | Styles that will be propagated to the cancel button                                                                                                           |
+| confirmButtonStyles | Object             | Styles that will be propagated to the confirm button                                                                                                          |
+| cancelButtonTitle   | string             | Title that will be propagated to the cancel button                                                                                                            |
+| confirmButtonTitle  | string             | Title that will be propagated to the confirm button                                                                                                           |
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+### example of using all properties
 
-### For Android
+![example](./screenshots/example2.jpg)
 
-```bash
-# using npm
-npm run android
+```tsx
+import Calendar from './CalendarPicker/Calendar';
 
-# OR using Yarn
-yarn android
+<Calendar
+  containerStyles={{backgroundColor: '#000', borderRadius: 5}}
+  currentMonthStyles={{color: '#FFF'}}
+  otherMonthsStyles={{color: '#EEE'}}
+  monthsArr={[
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]}
+  weekDayStyles={{fontWeight: '200', color: '#EEE'}}
+  weekDaysArr={['Mon', 'Tue', 'Weds', 'Thu', 'Fri', 'Sat', 'Sun']}
+  colors={['#2d6e3e', '#6fde8d']}
+  dateInMonthStyles={{fontWeight: '500', color: '#FFFFFF'}}
+  dateOutOfMontStyles={{fontWeight: '200', color: '#FFFFFF'}}
+  dateInChosenStyles={{color: '#000000'}}
+  returnValueType="MM/DD/YYYY"
+  onSetDate={(value: any) => {
+    console.log('set', value);
+  }}
+  onCancel={() => {
+    console.log('Cancel');
+  }}
+  onConfirm={(value: any) => {
+    console.log('onConfirm', value);
+  }}
+  cancelButtonStyles={{color: '#FF9999'}}
+  confirmButtonStyles={{color: '#6fde8d'}}
+  cancelButtonTitle="Скасувати"
+  confirmButtonTitle="Підтвердити"
+/>;
 ```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
