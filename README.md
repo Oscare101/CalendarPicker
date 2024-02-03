@@ -65,7 +65,22 @@ and replace library in `./components/GradientText.tsx` and `./components/RenderD
 | cancelButtonTitle   | string               | Title that will be propagated to the cancel button                                                                                                            |
 | confirmButtonTitle  | string               | Title that will be propagated to the confirm button                                                                                                           |
 
+### Example of range input
+
+![example](./screenshots/example3.jpg)
+
+```tsx
+<Calendar
+  onSetRange={(value: any) => {
+    console.log('range', value);
+  }}
+  range={true}
+/>
+```
+
 ### Initial values
+
+Use only `new Date()` format
 
 Initially selected date
 
@@ -90,20 +105,7 @@ Initially selected range of dates
 />
 ```
 
-### Example of range input
-
-![example](./screenshots/example3.jpg)
-
-```tsx
-<Calendar
-  onSetRange={(value: any) => {
-    console.log('range', value);
-  }}
-  range={true}
-/>
-```
-
-### Example of using all properties
+### Example of using all styles properties
 
 ![example](./screenshots/example2.jpg)
 
